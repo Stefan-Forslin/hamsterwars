@@ -11,9 +11,12 @@
     "url": "git+https://github.com/StefanForslin-iths/hamsterwars.git"
   },
   "keywords": [
-	  "express", "server", "fullstack", "node"
+    "express",
+    "server",
+    "fullstack",
+    "node"
   ],
-  "author": "",
+  "author": "Stefan Forslin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/StefanForslin-iths/hamsterwars/issues"
@@ -21,6 +24,7 @@
   "homepage": "https://github.com/StefanForslin-iths/hamsterwars#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "firebase-admin": "^9.6.0"
   }
 }
