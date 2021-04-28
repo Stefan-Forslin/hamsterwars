@@ -67,7 +67,7 @@ router.put('/:id', async (req, res) => {
 		return;
 	}
 	if(!hamsterRef.exists) {
-		res.status(404).send("Hamster does not exits.");
+		res.status(404).send("Hamster does not exits");
 		return;
 	}
 	try {
