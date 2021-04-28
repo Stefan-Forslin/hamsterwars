@@ -110,8 +110,25 @@ router.delete('/:id', async (req, res) =>{
 		res.sendStatus(400)
 		return
 	}
+	let docRef;
+	try {
+		docRef = await db.collection('Hamsters').doc(id).get();
+	}
+	catch(error) {
+		res.status(500).send(error.message);
+		return;
+	}
+	if(!docRef.exists) {
+		res.sendStatus(404);
+		return;
+	}
+	try {
 	await db.collection('Hamsters').doc(id).delete()
 	res.sendStatus(200)
+	}
+	catch(error) {
+		res.status(500).send(error.message);
+	}
 })
 module.exports = router
 /*function isHamstersObject(maybeObject) {
