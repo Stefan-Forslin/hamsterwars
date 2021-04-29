@@ -5,13 +5,13 @@ const db = dbFunction()
 router.get('/', async (req, res) =>{
 	const hamstersRef = db.collection('Hamsters')
 	const snapshot = await hamstersRef.get()
-    let items = []
+    let objects = []
 	snapshot.forEach(docRef => {
 		const data = docRef.data()
 		data.id = docRef.id
-		items.push(data)
+		objects.push(data)
 	})
-	res.send(items)
+	res.send(objects)
 })
 router.get('/:id', async (req, res) =>{
 	const id = req.params.id
@@ -39,6 +39,17 @@ router.post('/', async (req, res) => {
 		res.status(500).send(error.message);
 	}
 });
+function objectRef(testObject) {
+	if(
+		testObject && ['name', 'age', 'favFood', 'loves','imgName', 'wins', 'defeats', 'games'].every(o => testObject.hasOwnProperty(o)) ) {
+		if (testObject.age < 0 || !Number.isInteger(testObject.age)) return false;
+		if (!Number.isInteger(testObject.wins)) return false;
+		if (!Number.isInteger(testObject.defeats)) return false;
+		if (!Number.isInteger(testObject.games)) return false;
+		return true;
+	}
+	return false;
+};
 router.put('/:id', async (req, res) => {
 	const id = req.params.id;
 	const object = req.body;
@@ -81,15 +92,16 @@ router.get('/random', async (req, res) => {
 		return;
 	}
 	if (randomRef.empty) {
-		res.send([]);
+		res.send([
+		]);
 		return;
 	}
 	let randomHamster;
-	const items = [];
-	randomRef.forEach(doc => {
-		const data = doc.data();
-		data.id = doc.id;
-		items.push(data);
+	const objects = [];
+	randomRef.forEach(docRef => {
+		const data = docRef.data();
+		data.id = docRef.id;
+		objects.push(data);
 	});
 	res.send(randomHamster);
 });
