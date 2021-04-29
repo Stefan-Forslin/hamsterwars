@@ -1,3 +1,21 @@
 node_modules/
 DS_Store
 private-key-hamsters.json
+function objectRef(testObject) {
+	if(
+		testObject && ['name', 'age', 'favFood', 'loves', 'imgName', 'wins', 'defeats', 'games'].every(o => testObject.hasOwnProperty(o)) ) {
+		if (testObject.age < 0 || !Number.isInteger(testObject.age)) return false;
+		if (!Number.isInteger(testObject.wins)) return false;
+		if (!Number.isInteger(testObject.defeats)) return false;
+		if (!Number.isInteger(testObject.games)) return false;
+		return true;
+	}
+	return false;
+};
+/*function isHamstersObject(maybeObject) {
+	if (!maybeObject )
+	return false
+	else if (!maybeObject.name || !maybeObject.imgName || !maybeObject.defeats || !object.loves || !maybeObject.games || !maybeObject.age || !maybeObject.wins || !maybeObject.favFood)
+	return false
+	return true
+}*/

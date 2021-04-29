@@ -39,17 +39,6 @@ router.post('/', async (req, res) => {
 		res.status(500).send(error.message);
 	}
 });
-function objectRef(testObject) {
-	if(
-		testObject && ['name', 'age', 'favFood', 'loves', 'imgName', 'wins', 'defeats', 'games'].every(t => testObject.hasOwnProperty(t)) ) {
-		if (testObject.age < 0 || !Number.isInteger(testObject.age)) return false;
-		if (!Number.isInteger(testObject.wins)) return false;
-		if (!Number.isInteger(testObject.defeats)) return false;
-		if (!Number.isInteger(testObject.games)) return false;
-		return true;
-	}
-	return false;
-};
 router.put('/:id', async (req, res) => {
 	const id = req.params.id;
 	const object = req.body;
@@ -89,18 +78,18 @@ router.get('/random', async (req, res) => {
 	}
 	catch(error) {
 		res.status(500).send(error.message);
+		return;
 	}
 	if (randomRef.empty) {
-		res.send([
-		]);
+		res.send([]);
 		return;
 	}
 	let randomHamster;
+	const items = [];
 	randomRef.forEach(doc => {
 		const data = doc.data();
 		data.id = doc.id;
 		items.push(data);
-		randomHamster = items[Math.floor(Math.random() * items.length)];
 	});
 	res.send(randomHamster);
 });
@@ -124,17 +113,10 @@ router.delete('/:id', async (req, res) =>{
 	}
 	try {
 	await db.collection('Hamsters').doc(id).delete()
-	res.sendStatus(200)
+	    res.sendStatus(200)
 	}
 	catch(error) {
 		res.status(500).send(error.message);
 	}
 })
 module.exports = router
-/*function isHamstersObject(maybeObject) {
-	if (!maybeObject )
-	return false
-	else if (!maybeObject.name || !maybeObject.imgName || !maybeObject.defeats || !object.loves || !maybeObject.games || !maybeObject.age || !maybeObject.wins || !maybeObject.favFood)
-	return false
-	return true
-}*/
