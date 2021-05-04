@@ -1,8 +1,11 @@
 {
-  "name": "hamsterwars",
+  "name": "hamsterwarsapp",
   "version": "1.0.0",
   "description": "hamsterwars project, REST API, Backend",
   "main": "index.js",
+  "engines": {
+	  "npm"
+  }
   "scripts": {
     "start": "node server.js"
   },
