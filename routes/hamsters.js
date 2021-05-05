@@ -66,8 +66,8 @@ router.post('/', async (req, res) => {
     let docRef;
 	try {
 		docRef = await db.collection('Hamsters').add(object);
-		const newObj = { id: docRef.id };
-		res.send(newObj);
+		const newItem = { id: docRef.id };
+		res.send(newItem);
 	}
 	catch(error) {
 		console.log(error.message);
