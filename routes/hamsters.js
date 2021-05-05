@@ -15,13 +15,13 @@ const router = express.Router()
 		res.sendStatus(400);
 		return;
 	}
-    const hamsters = []
+    const hamsterObject = []
 	snapshot.forEach(doc => {
 		const data = doc.data();
 		data.id = doc.id;
-		hamsters.push(data);
+		hamsterObject.push(data);
 	});
-	res.status(200).send(hamsters);
+	res.status(200).send(hamsterObject);
 });
     router.get('/random', async (req, res) => {
 	let docRef;
@@ -36,13 +36,13 @@ const router = express.Router()
     res.status(404).send('Hamster does not exists');
     return;
   }
-  let hamsters = [];
+  let hamsterObject = [];
   let getRandom;
   docRef.forEach((doc) => {
     const data = doc.data();
 	data.id = doc.id;
-    hamsters.push(data);
-	getRandom = hamsters[Math.floor(Math.random()*hamsters.length)];
+    hamsterObject.push(data);
+	getRandom = hamsterObject[Math.floor(Math.random()*hamsterObject.length)];
   });
     res.send(getRandom)
 })
