@@ -33,7 +33,7 @@ const router = express.Router()
 		res.status(500).send(error.message)
 	}
   if (docRef.empty) {
-    res.status(404).send('Hamster does not exits');
+    res.status(404).send('Hamster does not exists');
     return;
   }
   let hamsters = [];
@@ -50,7 +50,7 @@ const router = express.Router()
         const id = req.params.id
 	    const docRef = await db.collection('Hamsters').doc(id).get();
         if (!docRef.exists) {
-            res.status(404).send('Hamster does not exits');
+            res.status(404).send('Hamster does not exists');
             return;
         };
         const data = docRef.data();
@@ -60,7 +60,7 @@ router.post('/', async (req, res) => {
 	const object = req.body;
 
 	if(!isHamsterItem(object)) {
-		res.status(400).send('Hamster does not exits')
+		res.status(400).send('Hamster does not exists')
 		return;
 	}
     let docRef;
@@ -119,7 +119,7 @@ function isHamsterItem(itm) {
 router.delete('/:id', async (req, res) => {
 	const id = req.params.id
 	if(!id) {
-		res.status(400).send('Hamster does not exits')
+		res.status(400).send('Hamster does not exists')
 		return
     }
     let docRef;
