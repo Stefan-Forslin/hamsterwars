@@ -58,7 +58,6 @@ const router = express.Router()
 })
 router.post('/', async (req, res) => {
 	const object = req.body;
-
 	if(!isHamsterItem(object)) {
 		res.status(400).send('Hamster does not exists')
 		return;
